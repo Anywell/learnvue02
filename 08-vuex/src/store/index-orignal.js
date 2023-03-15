@@ -38,25 +38,24 @@ const moduleA = {
 
 }
 
-const state = {
-  counter: 1000,
-    students: [
-    {id: 11, name: 'caocao', age: 30},
-    {id: 12, name: 'liubei', age: 40},
-    {id: 13, name: 'sunquan', age: 50},
-    {id: 14, name: 'guanyu', age: 50}
-  ],
-    info: {
-    name: 'kobe',
-      age: 40,
-      height: 1.98
-  }
-}
 
 // 2. 创建对象
 const store = new Vuex.Store({
 
-
+  state: {
+    counter: 1000,
+    students: [
+      {id: 11, name: 'caocao', age: 30},
+      {id: 12, name: 'liubei', age: 40},
+      {id: 13, name: 'sunquan', age: 50},
+      {id: 14, name: 'guanyu', age: 50}
+    ],
+    info: {
+      name: 'kobe',
+      age: 40,
+      height: 1.98
+    }
+  },
   mutations: {
     // 定义方法，默认有个state参数
     // increment(state){
