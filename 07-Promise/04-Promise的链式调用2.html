@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<script>
+
+
+// 1.网络请求，结果是aaa，自己处理（比如10行代码），
+// 2.下一步处理，给结果aaa拼接上111，继续自己处理（比如10行代码）
+// 3.继续下一步处理，拼接上222,aaa111222，然后自己处理
+
+new Promise((resolve, reject) => {
+  // 模拟网络请求
+  setTimeout(() => {
+    resolve('aaa')
+  }, 1000)
+}).then(res => {
+  // 1. 自己处理10行代码
+  console.log('第一层的10行处理代码')
+  // 2. 对结果进行第一次处理，当调用reject时
+  //return Promise.reject('error')
+  throw 'error message'
+  }).then(res => {
+    console.log(res, '第二层的10行处理代码')
+    // 3.对结果进行第二次处理
+    new Promise(resolve => {
+      resolve(res + '222')
+    }).then(res => {
+      console.log(res, '第三层处理代码')
+    })
+  }).catch(err => {
+    console.log(err)
+  })
+
+
+
+//简写1，使用Promise.resolve(data)
+// new Promise((resolve, reject) => {
+//   // 模拟网络请求
+//   setTimeout(() => {
+//     resolve('aaa')
+//   }, 1000)
+// }).then(res => {
+//   // 1. 自己处理10行代码
+//   console.log('第一层的10行处理代码')
+//   // 2. 对结果进行第一次处理，只有resolve时，可以省略reject
+//     return Promise.resolve(res + '111')
+//   }).then(res => {
+//     console.log(res, '第二层的10行处理代码')
+//     // 3.对结果进行第二次处理
+//     return Promise.resolve(res + '222')
+//   }).then(res => {
+//     console.log(res, '第三层处理代码')
+//   })
+
+
+// 简写2，省略掉Promise.resolve(data)，直接return
+// new Promise((resolve, reject) => {
+//   // 模拟网络请求
+//   setTimeout(() => {
+//     resolve('aaa')
+//   }, 1000)
+// }).then(res => {
+//   // 1. 自己处理10行代码
+//   console.log('第一层的10行处理代码')
+//   // 2. 对结果进行第一次处理，只有resolve时，可以省略reject
+//   return res + '111'
+// }).then(res => {
+//   console.log(res, '第二层的10行处理代码')
+//   // 3.对结果进行第二次处理
+//   return res + '222'
+// }).then(res => {
+//   console.log(res, '第三层处理代码')
+// })
+
+
+
+
+</script>
+
+</body>
+</html>

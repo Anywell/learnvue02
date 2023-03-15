@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<script>
+  // 使用Promise
+  //new Promise(函数参数(resolve, reject))， resolve 和 reject 本身也是函数
+  new Promise((resolve, reject) => {
+    // 1. 第一次网络请求代码
+    setTimeout(() => {
+      resolve()
+    }, 1000)
+  }).then(() => {
+    // 1. 第一次拿到请求结果代码
+    console.log('hello world')
+    console.log('hello world')
+    console.log('hello world')
+
+    return new Promise((resolve, reject) => {
+      // 2. 第二次网络请求的代码
+      setTimeout(() => {
+        resolve();
+      }, 1000)
+    }).then(() => {
+      // 2.第二次处理的代码
+      console.log('hello vuejs')
+      console.log('hello vuejs')
+      console.log('hello vuejs')
+      return new Promise((resolve, reject) => {
+        // 3. 第三次网络请求的代码
+        setTimeout(() => {
+          resolve();
+        })
+      }).then(() => {
+        // 3.第三次处理的代码
+        console.log('hello java')
+        console.log('hello java')
+        console.log('hello java')
+      })
+    })
+  })
+
+  // new Promise((resolve, reject) => {
+  //
+  //   setTimeout(() => {
+  //     // 成功的时候调用resolve 然后就会调用then参数里面的函数。可以传递参数data
+  //     resolve(data);
+  //
+  //     // 失败的时候调用reject
+  //     reject(err)
+  //   }, 1000)
+  // }).then((data) => {
+  //   // 获取到请求后的后续处理代码。
+  // }).catch((err) => {
+  //   // 失败后的处理代码
+  // })
+
+
+
+</script>
+
+</body>
+</html>
